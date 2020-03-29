@@ -30,12 +30,9 @@ RUN apt-get -y install ninja-build gperf git python3-setuptools && \
     # Newer PIP will not overwrite distutils, so upgrade PyYAML manually \
     python3 -m pip install --ignore-installed -U PyYAML
 ENV LC_ALL=C.UTF-8
-ENV LANG=C.UTF-8  
-# MCU boot fixes: it will fail if python-cryptography or python3-cryptography are installed 
+ENV LANG=C.UTF-8
+# MCU boot fixes: it will fail if python-cryptography or python3-cryptography are installed
 RUN apt-get -y remove python-cryptography python3-cryptography
-# Rust+Cargo
-RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
-ENV PATH=~/.local/bin:/usr/share/rust/.cargo/bin:$PATH
 
 # Build image, contains project-specific dependencies
 FROM base
