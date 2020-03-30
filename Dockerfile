@@ -1,10 +1,12 @@
 # Base image which contains global dependencies
 FROM ubuntu:18.04 as base
+
+# run as the default ubuntu user
+RUN useradd -l -u 1000 -G sudo -m -d /workdir user
 WORKDIR /workdir
 
 # System dependencies
-RUN mkdir /workdir/ncs && \
-    apt-get -y update && apt-get -y upgrade && apt-get -y install \
+RUN apt-get -y update && apt-get -y upgrade && apt-get -y install \
         wget \
         python3-pip \
         ninja-build \
@@ -46,10 +48,11 @@ RUN \
     pip3 install -r bootloader/mcuboot/scripts/requirements.txt && \
     echo "source /workdir/ncs/zephyr/zephyr-env.sh" >> ~/.bashrc && \
     mkdir /workdir/.cache && \
-    rm -rf /workdir/ncs/nrf
+    rm -rf /workdir/ncs/nrf ; chown -R user:user /workdir
 
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 ENV XDG_CACHE_HOME=/workdir/.cache
 ENV ZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb
 ENV GNUARMEMB_TOOLCHAIN_PATH=/workdir/gcc-arm-none-eabi-7-2018-q2-update
+USER user
