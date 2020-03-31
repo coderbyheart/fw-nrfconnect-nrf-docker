@@ -9,11 +9,7 @@ jobs:
       image: coderbyheart/fw-nrfconnect-nrf-docker-actions
       options: --user 1001
     steps:
-      - name: print env
-        run: printenv
       - uses: actions/checkout@master
-      - name: Find Dockerfile
-        run: find  / -type f -name Dockerfile
       - name: Build image
         run: |
           cd /__w/fw-nrfconnect-nrf-docker/fw-nrfconnect-nrf-docker
