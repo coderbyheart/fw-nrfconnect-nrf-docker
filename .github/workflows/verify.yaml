@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Install git
         run: |
-          apk add --no-cache git
+          sudo apk add --no-cache git
       - name: Build image
         run: |
           git clone https://github.com/NordicPlayground/fw-nrfconnect-nrf /data/nrf
