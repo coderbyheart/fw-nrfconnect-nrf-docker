@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: coderbyheart/fw-nrfconnect-nrf-docker-actions
-      options: --user 1001
+      options: --user 1000
     steps:
       - uses: actions/checkout@master
       - name: Who am i
