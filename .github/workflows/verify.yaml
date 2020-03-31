@@ -7,18 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Add user
-        run: adduser user
-      - name: Change permissions
-        run: |
-          chown -R user:user /home/runner/work/fw-nrfconnect-nrf-docker/fw-nrfconnect-nrf-docker
   build:
     needs: checkout
     container:
       image: docker
       volumes:
         - /home/runner/work/fw-nrfconnect-nrf-docker/fw-nrfconnect-nrf-docker:/data
-      options: --user 1000
+      options: --user 1001
     runs-on: ubuntu-latest
     steps:
       - name: Build image
