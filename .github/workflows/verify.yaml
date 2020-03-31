@@ -14,8 +14,10 @@ jobs:
       volumes:
         - /home/runner/work/fw-nrfconnect-nrf-docker/fw-nrfconnect-nrf-docker:/data
       options: --user 1001
-    runs-on: ubuntu-latest
     steps:
+      - name: Install git
+        run: |
+          apk add --no-cache git
       - name: Build image
         run: |
           git clone https://github.com/NordicPlayground/fw-nrfconnect-nrf /data/nrf
