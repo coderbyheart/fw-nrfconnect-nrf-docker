@@ -12,6 +12,8 @@ jobs:
           git clone https://github.com/NordicPlayground/fw-nrfconnect-nrf nrf
           cd nrf
           docker build -t coderbyheart/fw-nrfconnect-nrf-docker -f ../Dockerfile .
+      - name: Change permissions
+        run: sudo chown -R $(id -u):$(id -g) ${PWD}
       - name: Build asset_tracker application
         run: |
           docker run --rm -v ${PWD}/nrf:/workdir/ncs/nrf \
