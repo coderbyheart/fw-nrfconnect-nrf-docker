@@ -4,10 +4,10 @@ RUN apk add --no-cache git
 
 ARG USER=default
 ENV HOME /home/$USER
-RUN adduser -D $USER
-RUN addgroup docker
-RUN addgroup $USER docker
-RUN id $USER
+RUN adduser --uid 1001 -D $USER && \
+    addgroup docker && \
+    addgroup $USER docker && \
+    id $USER
 
 USER $USER
 WORKDIR $HOME
