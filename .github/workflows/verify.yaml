@@ -3,7 +3,15 @@ name: Verify Dockerfile
 on: push
 
 jobs:
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Change permissions
+        run: |
+          chown -R user:user /__w/fw-nrfconnect-nrf-docker
   build:
+    needs: checkout
     container:
       image: docker
       volumes:
@@ -11,7 +19,6 @@ jobs:
       options: --user 1000
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
       - name: Build image
         run: |
           git clone https://github.com/NordicPlayground/fw-nrfconnect-nrf /data/nrf
