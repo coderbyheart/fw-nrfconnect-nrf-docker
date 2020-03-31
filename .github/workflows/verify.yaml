@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@master
       - name: change permissions
         run: |
-          chown -R 1001:0 /home/runner/work/fw-nrfconnect-nrf-docker/fw-nrfconnect-nrf-docker
+          sudo chown -R 1001:0 /home/runner/work/fw-nrfconnect-nrf-docker/fw-nrfconnect-nrf-docker
   build:
     runs-on: ubuntu-latest
     needs: checkout
