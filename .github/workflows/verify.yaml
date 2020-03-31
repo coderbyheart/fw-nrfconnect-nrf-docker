@@ -18,8 +18,13 @@ jobs:
       options: --user 1001
     steps:
       - name: Debug
-        run: |
-          ls -la /__w/fw-nrfconnect-nrf-docker/fw-nrfconnect-nrf-docker
+        run: ls -la /
+      - name: Debug
+        run: ls -la /__w
+      - name: Debug
+        run: ls -la /__w/fw-nrfconnect-nrf-docker
+      - name: Debug
+        run: ls -la /__w/fw-nrfconnect-nrf-docker/fw-nrfconnect-nrf-docker
       - name: Build image
         run: |
           cd /__w/fw-nrfconnect-nrf-docker/fw-nrfconnect-nrf-docker
