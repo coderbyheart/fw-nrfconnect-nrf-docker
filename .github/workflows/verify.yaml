@@ -10,7 +10,7 @@ jobs:
       options: --user 1001
     steps:
       - name: print env
-        name: printenv
+        run: printenv
       - uses: actions/checkout@master
       - name: Find Dockerfile
         run: find  / -type f -name Dockerfile
