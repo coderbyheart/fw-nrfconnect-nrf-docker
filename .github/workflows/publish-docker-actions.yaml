@@ -1,0 +1,25 @@
+name: Publish Docker Image for GitHub Actions
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+env:
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Build image
+        run: |
+          cd .github/workflows
+          docker build -t coderbyheart/fw-nrfconnect-nrf-docker-actions .
+      - name: Publish image
+        run: |
+          cd nrf
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          docker images
+          docker push coderbyheart/fw-nrfconnect-nrf-docker-actions
