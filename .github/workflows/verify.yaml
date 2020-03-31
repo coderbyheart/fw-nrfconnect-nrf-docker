@@ -19,24 +19,16 @@ jobs:
     steps:
       - name: Debug
         run: |
-          ls -la
-          ls -la /__w
-          ls -la /__w/fw-nrfconnect-nrf-docker
-          ls -la /
-          ls -la /home
-          ls -la /home/runner
-          ls -la /home/runner/work
-          ls -la /home/runner/work/fw-nrfconnect-nrf-docker
-          ls -la /home/runner/work/fw-nrfconnect-nrf-docker/fw-nrfconnect-nrf-docker
+          ls -la /__w/fw-nrfconnect-nrf-docker/fw-nrfconnect-nrf-docker
       - name: Build image
         run: |
-          cd /home/runner/work/fw-nrfconnect-nrf-docker/fw-nrfconnect-nrf-docker
+          cd /__w/fw-nrfconnect-nrf-docker/fw-nrfconnect-nrf-docker
           git clone https://github.com/NordicPlayground/fw-nrfconnect-nrf nrf
           cd nrf
           docker build -t coderbyheart/fw-nrfconnect-nrf-docker -f ../Dockerfile .
       - name: Build asset_tracker application
         run: |
-          cd /home/runner/work/fw-nrfconnect-nrf-docker/fw-nrfconnect-nrf-docker
+          cd /__w/fw-nrfconnect-nrf-docker/fw-nrfconnect-nrf-docker
           docker run --rm -v ${PWD}/nrf:/workdir/ncs/nrf \
             coderbyheart/fw-nrfconnect-nrf-docker \
             /bin/bash -c 'cd ncs/nrf/applications/asset_tracker; west build -p always -b nrf9160_pca20035ns'
