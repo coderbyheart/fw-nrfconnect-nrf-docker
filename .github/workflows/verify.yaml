@@ -19,6 +19,12 @@ jobs:
         - /home/runner/work/fw-nrfconnect-nrf-docker/fw-nrfconnect-nrf-docker:/data
       options: --user 1001
     steps:
+      - name: Debug
+        run: |
+          ls -la
+          ls -la /
+          ls -la /data
+          ls -la /data/nrf
       - name: Build image
         run: |
           git clone https://github.com/NordicPlayground/fw-nrfconnect-nrf /data/nrf
