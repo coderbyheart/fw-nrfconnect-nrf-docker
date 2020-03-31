@@ -10,6 +10,8 @@ jobs:
       options: --user 1001
     steps:
       - uses: actions/checkout@master
+      - name: Who am i
+        run: id
       - name: Build image
         run: |
           cd /__w/fw-nrfconnect-nrf-docker/fw-nrfconnect-nrf-docker
