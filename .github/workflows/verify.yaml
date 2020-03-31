@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@master
       - name: Change permissions
         run: |
-          chown -R user:user /__w/fw-nrfconnect-nrf-docker
+          chown -R 1000: /__w/fw-nrfconnect-nrf-docker
   build:
     needs: checkout
     container:
