@@ -17,14 +17,8 @@ jobs:
       image: coderbyheart/fw-nrfconnect-nrf-docker-actions
       options: --user 1001
     steps:
-      - name: Debug
-        run: ls -la /
-      - name: Debug
-        run: ls -la /__w
-      - name: Debug
-        run: ls -la /__w/fw-nrfconnect-nrf-docker
-      - name: Debug
-        run: ls -la /__w/fw-nrfconnect-nrf-docker/fw-nrfconnect-nrf-docker
+      - name: Find Dockerfile
+        run: find  / -type f -name Dockerfile 2> /dev/null
       - name: Build image
         run: |
           cd /__w/fw-nrfconnect-nrf-docker/fw-nrfconnect-nrf-docker
