@@ -8,6 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
   build:
+    runs-on: ubuntu-latest
     needs: checkout
     container:
       image: docker
