@@ -5,21 +5,16 @@ on: push
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: coderbyheart/fw-nrfconnect-nrf-docker-actions
     steps:
       - uses: actions/checkout@master
-      - name: Who am i
-        run: id
       - name: Build image
         run: |
-          cd /__w/fw-nrfconnect-nrf-docker/fw-nrfconnect-nrf-docker
           git clone https://github.com/NordicPlayground/fw-nrfconnect-nrf nrf
           cd nrf
           docker build -t coderbyheart/fw-nrfconnect-nrf-docker -f ../Dockerfile .
       - name: Build asset_tracker application
         run: |
-          cd /__w/fw-nrfconnect-nrf-docker/fw-nrfconnect-nrf-docker
           docker run --rm -v ${PWD}/nrf:/workdir/ncs/nrf \
+            --user $(id -u):$(id -g) \
             coderbyheart/fw-nrfconnect-nrf-docker \
             /bin/bash -c 'cd ncs/nrf/applications/asset_tracker; west build -p always -b nrf9160_pca20035ns'
