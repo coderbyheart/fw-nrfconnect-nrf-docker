@@ -24,7 +24,7 @@ RUN mkdir /workdir/ncs && \
     wget -qO- https://www.nordicsemi.com/-/media/Software-and-other-downloads/Desktop-software/nRF-command-line-tools/sw/Versions-10-x-x/10-7-0/nRFCommandLineTools1070Linuxamd64tar.gz \
     | tar xz && \
     dpkg -i *.deb && \
-    cd ..; rm -rf tmp && \
+    cd .. && rm -rf tmp && \
     # Latest PIP & Python dependencies
     python3 -m pip install -U pip && \
     python3 -m pip install -U setuptools && \
