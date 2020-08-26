@@ -12,7 +12,8 @@ RUN mkdir /workdir/ncs && \
         ninja-build \
         gperf \
         git \
-        python3-setuptools && \
+        python3-setuptools \
+        libncurses5 libncurses5-dev && \
     apt-get -y remove python-cryptography python3-cryptography && \
     apt-get -y clean && apt-get -y autoremove && \
     # GCC ARM Embed Toolchain
