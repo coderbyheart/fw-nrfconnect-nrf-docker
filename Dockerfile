@@ -1,5 +1,5 @@
 # Base image which contains global dependencies
-FROM ubuntu:18.04 as base
+FROM ubuntu:20.04 as base
 WORKDIR /workdir
 
 # System dependencies
