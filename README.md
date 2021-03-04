@@ -7,37 +7,18 @@
 
 Install `docker` on your operating system. On Windows you might want to use the [WSL subsystem](https://docs.docker.com/docker-for-windows/wsl-tech-preview/).
 
-Clone the repo:
-
-    git clone https://github.com/nrfconnect/sdk-nrf
-
-Copy the Dockerfile to e.g. `/tmp/Dockerfile`, you might need to adapt the installation of [the requirements](./Dockerfile#L48-L51).
-
-    wget https://raw.githubusercontent.com/coderbyheart/fw-nrfconnect-nrf-docker/saga/Dockerfile -O /tmp/Dockerfile
-
 Build the image (this is only needed once):
 
-    cd sdk-nrf
-    docker build --no-cache=true -t fw-nrfconnect-nrf-docker -f /tmp/Dockerfile .
+    docker build --no-cache=true -t fw-nrfconnect-nrf-docker .
 
 Build the firmware for the `asset_tracker` application example:
 
-    docker run --rm -v ${PWD}:/workdir/ncs/nrf fw-nrfconnect-nrf-docker \
-      /bin/bash -c 'cd ncs/nrf/applications/asset_tracker && west build -p always -b nrf9160dk_nrf9160ns'
+    docker run --rm -v ${PWD}:/workdir fw-nrfconnect-nrf-docker \
+      west build -p always -b nrf9160dk_nrf9160ns --build-dir /workdir/build/ /ncs/nrf/applications/asset_tracker
 
-The firmware file will be in `applications/asset_tracker/build/zephyr/merged.hex`.
+The firmware file will be in `./build/zephyr/merged.hex`.
 
 You only need to run this command to build.
-
-## Full example
-
-    git clone https://github.com/nrfconnect/sdk-nrf
-    wget https://raw.githubusercontent.com/coderbyheart/fw-nrfconnect-nrf-docker/saga/Dockerfile -O /tmp/Dockerfile
-    cd sdk-nrf
-    docker build --no-cache=true -t fw-nrfconnect-nrf-docker -f /tmp/Dockerfile .
-    docker run --rm -v ${PWD}:/workdir/ncs/nrf fw-nrfconnect-nrf-docker \
-      /bin/bash -c 'cd ncs/nrf/applications/asset_tracker && west build -p always -b nrf9160dk_nrf9160ns'
-    ls -la applications/asset_tracker/build/zephyr/merged.hex
 
 ## Using pre-built image from Dockerhub
 
@@ -45,26 +26,23 @@ You only need to run this command to build.
 
 You can use the pre-built image [`coderbyheart/fw-nrfconnect-nrf-docker:latest`](https://hub.docker.com/r/coderbyheart/fw-nrfconnect-nrf-docker).
 
-    git clone https://github.com/nrfconnect/sdk-nrf
-    cd sdk-nrf
-    docker run --rm -v ${PWD}:/workdir/ncs/nrf coderbyheart/fw-nrfconnect-nrf-docker:latest \
-      /bin/bash -c 'cd ncs/nrf/applications/asset_tracker && west build -p always -b nrf9160dk_nrf9160ns'
-    ls -la applications/asset_tracker/build/zephyr/merged.hex
+    docker run --rm -v ${PWD}:/workdir coderbyheart/fw-nrfconnect-nrf-docker:latest \
+      west build -p always -b nrf9160dk_nrf9160ns --build-dir /workdir/build/ /ncs/nrf/applications/asset_tracker
+    ls -la ./build/zephyr/merged.hex
 
 ### Build a Zephyr sample
 
 This builds the `hci_uart` sample and stores the `hci_uart.hex` file in the current directory:
 
-    docker run --rm -v ${PWD}:/workdir/ncs/nrf coderbyheart/fw-nrfconnect-nrf-docker:latest \
-        /bin/bash -c 'cd ncs/zephyr && west build samples/bluetooth/hci_uart -p always -b nrf9160dk_nrf52840 && \
-        ls -la build/zephyr && cp build/zephyr/zephyr.hex /workdir/ncs/nrf/hci_uart.hex'
+    docker run --rm -v ${PWD}:/workdir coderbyheart/fw-nrfconnect-nrf-docker:latest \
+        west build /ncs/zephyr/samples/bluetooth/hci_uart -p always -b nrf9160dk_nrf52840 --build-dir /workdir/build/
+    ls -la build/zephyr && cp build/zephyr/zephyr.hex hci_uart.hex
 
 ## Flashing
 
-    cd sdk-nrf
-    docker run --rm -v ${PWD}:/workdir/ncs/nrf --device=/dev/ttyACM0 --privileged \
+    docker run --rm --device=/dev/ttyACM0 --privileged \
       coderbyheart/fw-nrfconnect-nrf-docker:latest \
-      /bin/bash -c 'cd ncs/nrf/applications/asset_tracker && west flash'
+      cd ncs/nrf/applications/asset_tracker && west flash
 
 ## ClangFormat
 
@@ -85,13 +63,12 @@ to format your sources.
 
 ## Interactive usage
 
-    cd sdk-nrf
-    docker run -it --name fw-nrfconnect-nrf-docker -v ${PWD}:/workdir/ncs/nrf --device=/dev/ttyACM0 --privileged \
+    docker run -it --name fw-nrfconnect-nrf-docker --device=/dev/ttyACM0 --privileged \
     coderbyheart/fw-nrfconnect-nrf-docker:latest /bin/bash
 
 Then, inside the container:
 
-    cd ncs/nrf/applications/asset_tracker
+    cd /ncs/nrf/applications/asset_tracker
     west build -p always -b nrf9160_pca20035ns
     west flash
     west build
