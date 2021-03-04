@@ -10,6 +10,10 @@ on:
 env:
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
+inputs:
+  NCS_REVISION:
+    description: 'nRF Connect SDK version'
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,12 +22,12 @@ jobs:
 
       - name: Build image
         run: |
-          docker build -t coderbyheart/fw-nrfconnect-nrf-docker .
+          docker build --build-arg NCS_REVISION=$INPUT_NCS_REVISION -t coderbyheart/fw-nrfconnect-nrf-docker:$INPUT_NCS_REVISION .
 
       - name: Build asset_tracker application
         run: |
           docker run --rm -v ${PWD}:/workdir \
-            coderbyheart/fw-nrfconnect-nrf-docker \
+            coderbyheart/fw-nrfconnect-nrf-docker:$INPUT_NCS_REVISION \
             west build -p always -b nrf9160dk_nrf9160ns --build-dir /workdir/build/ /ncs/nrf/applications/asset_tracker
 
       - uses: actions/upload-artifact@v2
