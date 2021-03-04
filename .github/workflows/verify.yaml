@@ -2,11 +2,6 @@ name: Verify Dockerfile
 
 on: pull_request
 
-inputs:
-  NCS_REVISION:
-    description: 'nRF Connect SDK version'
-    default: 'v1.4.2'
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,9 +9,9 @@ jobs:
       - uses: actions/checkout@master
       - name: Build image
         run: |
-          docker build --build-arg NCS_REVISION=$INPUT_NCS_REVISION -t coderbyheart/fw-nrfconnect-nrf-docker:$INPUT_NCS_REVISION .
+          docker build -t coderbyheart/fw-nrfconnect-nrf-docker .
       - name: Build asset_tracker application
         run: |
           docker run --rm \
-            coderbyheart/fw-nrfconnect-nrf-docker:$INPUT_NCS_REVISION \
+            coderbyheart/fw-nrfconnect-nrf-docker \
             west build -p always -b nrf9160dk_nrf9160ns /ncs/nrf/applications/asset_tracker

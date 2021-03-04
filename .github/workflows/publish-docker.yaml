@@ -6,13 +6,13 @@ on:
       - saga
   schedule:
     - cron: "0 0 * * *"
+  workflow_dispatch:
+    inputs:
+      NCS_REVISION:
+        description: 'nRF Connect SDK version'
 
 env:
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-
-inputs:
-  NCS_REVISION:
-    description: 'nRF Connect SDK version'
 
 jobs:
   build:

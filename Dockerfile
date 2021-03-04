@@ -28,10 +28,12 @@ RUN apt-get -y update && \
     | tar xj && \
     mkdir tmp && cd tmp && \
     # Nordic command line tools
+    # Releases: https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Command-Line-Tools/Download
     wget -qO- https://www.nordicsemi.com/-/media/Software-and-other-downloads/Desktop-software/nRF-command-line-tools/sw/Versions-10-x-x/10-12-1/nRFCommandLineTools10121Linuxamd64.tar.gz \
     | tar xz && \
     dpkg -i *.deb && \
-    cd .. && rm -rf tmp
+    cd .. && rm -rf tmp && \
+    pip3 install -U pip
 
 # Build image, contains project-specific dependencies
 FROM base
