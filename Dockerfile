@@ -17,8 +17,8 @@ RUN apt-get -y update && \
         ccache dfu-util device-tree-compiler wget \
         python3-dev python3-pip python3-setuptools python3-tk python3-wheel xz-utils file \
         make gcc gcc-multilib g++-multilib libsdl2-dev \
-        # process .tar.bz2
-        bzip2  \
+        # process .zip & .tar.bz2
+        unzip bzip2 \
         # nRF-command-line-tools dependency
         libncurses5 && \
     rm -rf /var/lib/apt/lists/* && \
