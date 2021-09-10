@@ -29,10 +29,9 @@ RUN apt-get -y update && \
     mkdir tmp && cd tmp && \
     # Nordic command line tools
     # Releases: https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Command-Line-Tools/Download
-    wget -q https://www.nordicsemi.com/-/media/Software-and-other-downloads/Desktop-software/nRF-command-line-tools/sw/Versions-10-x-x/10-13-0/nRF-Command-Line-Tools_10_13_0_Linux64.zip && \
-    unzip nRF-Command-Line-Tools_10_13_0_Linux64.zip && \
-    tar xvzf nRF-Command-Line-Tools_10_13_0_Linux64/nRF-Command-Line-Tools_10_13_0_Linux-amd64.tar.gz && \
-    dpkg -i *.deb && \
+    wget -q https://www.nordicsemi.com/-/media/Software-and-other-downloads/Desktop-software/nRF-command-line-tools/sw/Versions-10-x-x/10-14-0/nRF-Command-Line-Tools_10_14_0_Linux64.zip && \
+    unzip nRF-Command-Line-Tools_10_14_0_Linux64.zip && \
+    dpkg --install nRF-Command-Line-Tools_10_14_0_Linux64/*.deb && \
     cd .. && rm -rf tmp && \
     pip3 install -U pip
 
