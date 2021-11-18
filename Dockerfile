@@ -15,8 +15,8 @@ RUN mkdir /workdir/ncs && \
         unzip \
         python3-setuptools \
         libncurses5 libncurses5-dev \
-        libyaml-dev libfdt1 && \
-    apt-get -y remove python-cryptography python3-cryptography && \
+        libyaml-dev libfdt1 \
+        libusb udevadm && \
     apt-get -y clean && apt-get -y autoremove && \
     # GCC ARM Embed Toolchain
     wget -qO- \
