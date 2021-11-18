@@ -21,7 +21,7 @@ RUN mkdir /workdir/ncs && \
     # GCC ARM Embed Toolchain
     wget -qO- \
     'https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2019q4/gcc-arm-none-eabi-9-2019-q4-major-x86_64-linux.tar.bz2?revision=108bd959-44bd-4619-9c19-26187abf5225&la=en&hash=E788CE92E5DFD64B2A8C246BBA91A249CB8E2D2D' \
-    | tar xvj && \
+    | tar xj && \
     mkdir tmp && cd tmp && \
     # Device Tree Compiler 1.5.1 (for Ubuntu 20.04)
     # Releases: https://git.kernel.org/pub/scm/utils/dtc/dtc.git
@@ -30,7 +30,7 @@ RUN mkdir /workdir/ncs && \
     # Releases: https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Command-Line-Tools/Download
     wget -q https://www.nordicsemi.com/-/media/Software-and-other-downloads/Desktop-software/nRF-command-line-tools/sw/Versions-10-x-x/10-15-0/nrf-command-line-tools-10.15.0_amd.zip && \
     unzip nrf-command-line-tools-10.15.0_amd.zip && \
-    tar xvzf nrf-command-line-tools-10.15.0_Linux-amd64.tar.gz && \
+    tar xzf nrf-command-line-tools-10.15.0_Linux-amd64.tar.gz && \
     dpkg -i *.deb && \
     cd .. && rm -rf tmp && \
     # Latest PIP & Python dependencies
