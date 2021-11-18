@@ -10,6 +10,8 @@ jobs:
           - main
           - v1.7-branch
           - v1.6-branch
+          - v1.5-branch
+          - v1.4-branch
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
