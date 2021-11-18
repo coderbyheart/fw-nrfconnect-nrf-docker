@@ -26,6 +26,7 @@ jobs:
             coderbyheart/fw-nrfconnect-nrf-docker:${{ matrix.ncs_branch }} \
             /bin/bash -c 'cd ncs/nrf/applications/asset_tracker && west build -p always -b nrf9160dk_nrf9160ns'
       - name: Build asset_tracker_v2 application
+        if: matrix.ncs_branch != 'v1.4-branch'
         run: |
           docker run --rm -v ${PWD}/nrf:/workdir/ncs/nrf \
             coderbyheart/fw-nrfconnect-nrf-docker:${{ matrix.ncs_branch }} \
