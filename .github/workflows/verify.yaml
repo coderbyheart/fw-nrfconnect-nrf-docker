@@ -30,7 +30,7 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: asset_tracker
+          name: asset_tracker-${{ matrix.ncs_branch }}
           path: |
             zephyr/merged.hex
             zephyr/app_update.bin
@@ -45,7 +45,7 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: asset_tracker_v2
+          name: asset_tracker_v2-${{ matrix.ncs_branch }}
           path: |
             zephyr/merged.hex
             zephyr/app_update.bin
