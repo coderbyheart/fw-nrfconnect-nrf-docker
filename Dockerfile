@@ -4,7 +4,8 @@ WORKDIR /workdir
 
 # System dependencies
 ARG arch=amd64
-RUN mkdir /workdir/ncs && \
+RUN mkdir /workdir/project && \
+    mkdir /workdir/.cache && \
     apt-get -y update && \
     apt-get -y upgrade && \
     apt-get -y install \
@@ -64,21 +65,23 @@ RUN mkdir /workdir/ncs && \
     ln -s /usr/bin/clang-format-9 /usr/bin/clang-format && \
     wget -qO- https://raw.githubusercontent.com/nrfconnect/sdk-nrf/main/.clang-format > /workdir/.clang-format
 
-# Build image, contains project-specific dependencies
+# Download sdk-nrf and west dependencies to install pip requirements
 FROM base
-COPY . /workdir/ncs/nrf
+ARG nrf_rev=main
 RUN \
-    # Zephyr requirements of nrf
-    cd /workdir/ncs/nrf && west init -l && \
-    cd /workdir/ncs && west update && \
+    mkdir tmp && cd tmp && \
+    west init -m https://github.com/nrfconnect/sdk-nrf --mr ${nrf_rev} && \
+    west update --narrow -o=--depth=1 && \
     python3 -m pip install -r zephyr/scripts/requirements.txt && \
     python3 -m pip install -r nrf/scripts/requirements.txt && \
     python3 -m pip install -r bootloader/mcuboot/scripts/requirements.txt && \
-    echo "source /workdir/ncs/zephyr/zephyr-env.sh" >> ~/.bashrc && \
-    mkdir /workdir/.cache
+    cd .. && rm -rf tmp
 
+WORKDIR /workdir/project
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 ENV XDG_CACHE_HOME=/workdir/.cache
 ENV ZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb
 ENV GNUARMEMB_TOOLCHAIN_PATH=/workdir/gcc-arm-none-eabi-9-2019-q4-major
+ENV ZEPHYR_BASE=/workdir/project/zephyr
+ENV PATH="${ZEPHYR_BASE}/scripts:${PATH}"
