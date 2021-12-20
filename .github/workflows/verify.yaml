@@ -19,7 +19,7 @@ jobs:
       - name: Build image
         run: |
           docker build -t coderbyheart/fw-nrfconnect-nrf-docker:${{ matrix.ncs_branch }} \
-            --build-arg nrf_ver=${{ matrix.ncs_branch }} .
+            --build-arg sdk_nrf_revision=${{ matrix.ncs_branch }} .
       
       - name: Initialize sdk-nrf
         run: |

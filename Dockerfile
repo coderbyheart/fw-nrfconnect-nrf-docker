@@ -67,10 +67,10 @@ RUN mkdir /workdir/project && \
 
 # Download sdk-nrf and west dependencies to install pip requirements
 FROM base
-ARG nrf_rev=main
+ARG sdk_nrf_revision=main
 RUN \
     mkdir tmp && cd tmp && \
-    west init -m https://github.com/nrfconnect/sdk-nrf --mr ${nrf_rev} && \
+    west init -m https://github.com/nrfconnect/sdk-nrf --mr ${sdk_nrf_revision} && \
     west update --narrow -o=--depth=1 && \
     python3 -m pip install -r zephyr/scripts/requirements.txt && \
     python3 -m pip install -r nrf/scripts/requirements.txt && \
