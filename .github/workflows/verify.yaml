@@ -8,6 +8,7 @@ jobs:
       matrix:
         ncs_branch:
           - main
+          - v1.8-branch
           - v1.7-branch
           - v1.6-branch
           - v1.5-branch
@@ -20,7 +21,7 @@ jobs:
         run: |
           docker build -t coderbyheart/fw-nrfconnect-nrf-docker:${{ matrix.ncs_branch }} \
             --build-arg sdk_nrf_revision=${{ matrix.ncs_branch }} .
-      
+
       - name: Initialize sdk-nrf
         run: |
           docker run --rm -v ${PWD}:/workdir/project \

@@ -40,7 +40,7 @@ RUN mkdir /workdir/project && \
     wget -qO - "${ARM_URL}" | tar xj && \
     # Nordic command line tools
     # Releases: https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Command-Line-Tools/Download
-    # Doesn´t exist for arm64, but not necessary for building
+    # Doesn't exist for arm64, but not necessary for building
     if [ ! -z "$NCLT_URL" ]; then \
         mkdir tmp && cd tmp && \
         wget -q "${NCLT_URL}" && \
