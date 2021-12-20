@@ -12,7 +12,6 @@ This project defines a Docker image that contains all dependencies to run `west`
 ![Docker + Zephyr -> merged.hex](./diagram.png)
 
 Install `docker` on your operating system. On Windows you might want to use the [WSL subsystem](https://docs.docker.com/docker-for-wi/workdir/project/ndows/wsl-tech-preview/).
-fw-nrfconnect-nrf-docker \
 
 ## Setup
 
