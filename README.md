@@ -30,7 +30,7 @@ Build the image (this is only needed once):
 
 > _:green_apple: Note:_ To build for a Mac with the M1 architecture, you need to specify the `arm64` architecture when building: `--build-arg arch=arm64`.
 
-> _Note:_ The `sdk_nrf_revision` build argument can be used to specify what version of sdk-nrf that will be used when looking up pip dependencies for nrf and it´s west dependency repositories. The value can be a git _tag_, _branch_ or _sha_ from the [sdk-nrf repository](https://github.com/nrfconnect/sdk-nrf).
+> _Note:_ The `sdk_nrf_revision` build argument can be used to specify what version of sdk-nrf that will be used when looking dependencies with pip for the SDK and it's west dependency repositories. The value can be a git _tag_, _branch_ or _sha_ from the [sdk-nrf repository](https://github.com/nrfconnect/sdk-nrf).
 
 ### Use pre-built image from Dockerhub
 
