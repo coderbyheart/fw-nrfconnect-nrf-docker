@@ -1,6 +1,6 @@
 # Building nRF Connect SDK applications with Docker
 
-> 🚨 🚨 🚨 🚨 🚨 Moved to https://github.com/NordicPlayground/asset-tracker-docker 🚨 🚨 🚨 🚨 🚨
+> 🚨 🚨 🚨 🚨 🚨 Moved to https://github.com/NordicPlayground/nrf-docker 🚨 🚨 🚨 🚨 🚨
 
 ![Publish Docker](https://github.com/coderbyheart/fw-nrfconnect-nrf-docker/workflows/Publish%20Docker/badge.svg?branch=saga)
 (_the [Docker image](https://hub.docker.com/r/coderbyheart/fw-nrfconnect-nrf-docker) is build against [nRF Connect SDK](https://github.com/nrfconnect/sdk-nrf) `main`,`v1.9-branch`,`v1.8-branch`, `v1.7-branch`, `v1.6-branch`, `v1.5-branch`, and `v1.4-branch` every night._)
